@@ -1,18 +1,20 @@
-import domain.*;
-import ui.Game;
+package domain;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlackJack {
+public class RuleTest {
 
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.play();
+    @Test
+    @DisplayName("게임 승리자")
+    public void winnerTest(){
         CardDeck cardDeck = new CardDeck();
-        List<Card> dealerCardList = new ArrayList<>();
+        List<Card> dealerCardlist=new ArrayList<>();
         List<Card> gamerCardList = new ArrayList<>();
-        Dealer dealer=new Dealer(dealerCardList);
+        Dealer dealer=new Dealer(dealerCardlist);
         Gamer gamer=new Gamer(gamerCardList);
         Rule rule=new Rule();
         gamer.firstPick(cardDeck);

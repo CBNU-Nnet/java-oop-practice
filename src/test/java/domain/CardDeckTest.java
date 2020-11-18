@@ -9,6 +9,7 @@ import org.junit.runners.Parameterized;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class CardDeckTest {
@@ -37,22 +38,14 @@ public class CardDeckTest {
                 cardDeck.addCard(card);
             }
     }
-    @Test
-    @DisplayName("카드 뽑기")
-    void PickTest(){
-        CardDeck cardDeck = new CardDeck();
-        Card card = cardDeck.pick();
-        System.out.println(card.getPattern());
-        System.out.println(card.getCharacter());
-        assertSame(cardDeck.getCards().contains(card),true);
-    }
 
     @Test
     @DisplayName("카드 뽑은 후 삭제")
     void RemoveTest(){
         CardDeck cardDeck = new CardDeck();
-        Card card = cardDeck.remove_card();
-        assertSame(cardDeck.getCards().contains(card),false);
-
+        Card card = cardDeck.pickAndRemove();
+        System.out.println(card.getPattern());
+        System.out.println(card.getCharacter());
+        assertEquals(cardDeck.getCards().contains(card),false);
     }
 }
