@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static domain.CardDeck.*;
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -27,7 +29,7 @@ public class CardDeckTest {
                 Card card = new Card(makeValue(j), cardType); //각 카드의 객체를 만듬
                 cardDeck.addCards(card); //카드 덱에 생성한 카드 추가
                 check = cardDeck.getCards().contains(card); //제대로 값이 들어가져있는지 테스트
-                assertSame(check, true);
+                assertEquals(check, true);
             }
         }
     }
@@ -38,19 +40,21 @@ public class CardDeckTest {
     public  void pickTest(){
 
         CardDeck deck = new CardDeck();
-        Card card =pickCard(deck.getCards()); //랜덤으로 카드 뽑음
-        assertSame(deck.getCards().contains(card), true);//카드덱에 있는지 확이
+        Card card =deck.pickCard(); //랜덤으로 카드 뽑음
+        assertEquals(deck.getCards().contains(card), true);//카드덱에 있는지 확이
     }
 
     @Test
     @DisplayName("뽑은 카드 제거 테스트")
     public void removedTest(){
         CardDeck deck = new CardDeck();
-        ArrayList<Card> cardList= new ArrayList<>(); //카드 뽑은 뒤 카드덱
-        Card pick = pickCard(deck.getCards()); //뽑은 카드
-        assertSame(true, deck.getCards().contains(pick) );
-        cardList=removeCard(deck.getCards(),pick);//카드 뽑은뒤 카드덱
-        assertSame(false, cardList.contains(pick));
+        List<Card> cardList= new ArrayList<>(); //카드 뽑은 뒤 카드덱
+        Card pick = deck.pickCard(); //뽑은 카드
+        assertEquals(true, deck.getCards().contains(pick) );
+        removeCard(pick);//카드 뽑은뒤 카드덱
+        assertEquals(false, cardList.contains(pick));
     }
+
+
 
 }
